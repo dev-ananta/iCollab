@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:iCollab}",
+            "name": "Debug iCollab",
+            "target": "iCollab",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug iCollab"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:iCollab}",
+            "name": "Release iCollab",
+            "target": "iCollab",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release iCollab"
+        }
+    ]
+}
