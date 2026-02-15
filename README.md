@@ -1,8 +1,15 @@
 # iCollab
 > 🖥️🤝🖥️
-LAN-Based macOS Screen Share (View-Only MVP) iCollab is a lightweight, high-performance macOS screen-sharing application built with **SwiftUI**, **ScreenCaptureKit**, and **Network.framework**. It allows users to host a screen-sharing session over either a LAN-based connection (Local Area Network) or a connection revolving 6-digit session codes.
+LAN-Based macOS Screen Share — Easy Install via DMG
 
-## 🖥️ Application Compatibility:
+iCollab is a lightweight, high-performance macOS screen-sharing application built with **SwiftUI**, **ScreenCaptureKit**, and **Network.framework**. It allows users to host a screen-sharing session over either a LAN-based connection (Local Area Network) or a connection revolving 6-digit session codes.
+
+## 🖥️ Application Compatibility
+
+- **macOS 13.0 (Ventura)** or newer
+- **Apple Silicon (arm64)** — native, optimized performance
+- **Intel (x86_64)** — full support
+- Both architectures are automatically built and available as separate DMG installers
 
 ## ✨ Features
 
@@ -37,48 +44,68 @@ iCollab/
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Prerequisites (for end users)
 
-* **macOS 13.0 (Ventura)** or newer.
-* **Swift 5.9+** (installed via Command Line Tools).
-* **Visual Studio Code** (with the Swift extension).
+* **macOS 13.0 (Ventura)** or newer
 
-### Installation & Build
+### Prerequisites (for developers/building locally)
+
+* **macOS 13.0 (Ventura)** or newer
+* **Swift 5.9+** (installed via Command Line Tools)
+
+### Installation (End Users)
+
+1. **Download the DMG installer** from [Releases](https://github.com/aparikh1/iCollab/releases)
+2. **Open the DMG** and drag `iCollab.app` to Applications
+3. **Remove quarantine attribute** (if Gatekeeper blocks it):
+```bash
+xattr -d com.apple.quarantine /Applications/iCollab.app
+```
+4. **Launch** from Applications or Spotlight
+
+### Building Locally (Developers)
 
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/yourusername/iCollab.git
+git clone https://github.com/aparikh1/iCollab.git
 cd iCollab
 ```
 2. **Build the project**:
 ```bash
-swift build
+swift build -c release
 ```
-3. **Sign the binary (Crucial)**: Since this app uses screen recording and network servers, you must sign it with the provided entitlements and enable the **Hardened Runtime**:
+3. **Remove quarantine attribute** (optional):
 ```bash
-codesign --entitlements iCollab.entitlements --options runtime -f -s - .build/debug/iCollab
+xattr -d com.apple.quarantine .build/release/iCollab
+```
+4. **Run**:
+```bash
+./.build/release/iCollab
 ```
 
 ## 🛠️ Usage
 
 ### Hosting a Session
 
-1. Run the app: `./.build/debug/iCollab`.
-2. Click **Host Session**.
-3. **Permissions**: When prompted, allow Screen Recording in `System Settings > Privacy & Security > Screen Recording`.
-4. Share the **Session Code** or your **Local IP** with the client.
+1. Launch `iCollab` from Applications
+2. Click **Host Session**
+3. **Permissions**: Allow Screen Recording when prompted
+4. Share the **Session Code** or **Local IP** with the client
 
 ### Joining a Session
 
-1. Run the app on a second machine (or a second window).
-2. Enter the Host's IP address in the text field.
-3. Click **Join Session**.
+1. Launch `iCollab` on a second machine
+2. Enter the Host's IP address in the text field
+3. Click **Join Session**
 
-## 🔒 Security & Troubleshooting
+## � Troubleshooting
 
-### Trace Trap / Crash on Startup
+### App Won't Launch / "Damaged" Message
 
-If the app exits with a `trace trap`, it usually means the signature is invalid for the requested entitlements. Ensure you are using the `--options runtime` flag during the `codesign` step.
+If macOS blocks the app as "damaged" or "unverified":
+```bash
+xattr -d com.apple.quarantine /Applications/iCollab.app
+```
 
 ### Black Screen
 
