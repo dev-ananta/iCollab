@@ -6,10 +6,10 @@ iCollab is a lightweight, high-performance macOS screen-sharing application buil
 
 ## 🖥️ Application Compatibility
 
-- **macOS 13.0 (Ventura)** or newer
-- **Apple Silicon (arm64)** — native, optimized performance
-- **Intel (x86_64)** — full support
-- Both architectures are automatically built and available as separate DMG installers
+- **macOS 13.0 (Ventura)** or Newer
+- **Apple Silicon (arm64)** — Native, Optimized Performance
+- **Intel (x86_64)** — Full Support
+- Both Architectures are Automatically Built & Available as Separate DMG Installers.
 
 ## ✨ Features
 
