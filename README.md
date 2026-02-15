@@ -2,7 +2,7 @@
 > 🖥️🤝🖥️
 LAN-Based macOS Screen Share — Easy Install via DMG
 
-iCollab is a lightweight, high-performance macOS screen-sharing application built with **SwiftUI**, **ScreenCaptureKit**, and **Network.framework**. It allows users to host a screen-sharing session over either a LAN-based connection (Local Area Network) or a connection revolving 6-digit session codes.
+iCollab is a lightweight, high-performance macOS screen-sharing application built with **SwiftUI**, **ScreenCaptureKit**, and **Network.framework**. It allows users to host a screen-sharing session over either a LAN-based connection (Local Area Network) or a connection regarding 6-digit session codes.
 
 ## 🖥️ Application Compatibility
 
