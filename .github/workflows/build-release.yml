@@ -34,11 +34,12 @@ jobs:
           APP_BUNDLE="iCollab.app"
           mkdir -p "$APP_BUNDLE/Contents/MacOS"
           mkdir -p "$APP_BUNDLE/Contents/Resources"
-          
+
           cp "$BINARY" "$APP_BUNDLE/Contents/MacOS/iCollab"
           cp Info.plist "$APP_BUNDLE/Contents/"
+          cp icon.icns "$APP_BUNDLE/Contents/Resources/"
           echo -n "APPL????" > "$APP_BUNDLE/Contents/PkgInfo"
-          
+
           echo "bundle=$APP_BUNDLE" >> $GITHUB_OUTPUT
 
       - name: Create DMG
@@ -101,9 +102,10 @@ jobs:
           APP_BUNDLE="iCollab.app"
           mkdir -p "$APP_BUNDLE/Contents/MacOS"
           mkdir -p "$APP_BUNDLE/Contents/Resources"
-          
+
           cp "$BINARY" "$APP_BUNDLE/Contents/MacOS/iCollab"
           cp Info.plist "$APP_BUNDLE/Contents/"
+          cp icon.icns "$APP_BUNDLE/Contents/Resources/"
           echo -n "APPL????" > "$APP_BUNDLE/Contents/PkgInfo"
           
           echo "bundle=$APP_BUNDLE" >> $GITHUB_OUTPUT
