@@ -16,10 +16,11 @@ final class NetworkManager: ObservableObject {
             let listener = try NWListener(using: .tcp, on: 8080)
 
             listener.newConnectionHandler = { [weak self] newConn in
+                guard let weakSelf = self else { return }
+                
                 Task { @MainActor in
-                    guard let self else { return }
-                    self.connection = newConn
-                    self.setupConnection(newConn)
+                    weakSelf.connection = newConn
+                    weakSelf.setupConnection(newConn)
                 }
             }
 
@@ -43,14 +44,15 @@ final class NetworkManager: ObservableObject {
     private func setupConnection(_ conn: NWConnection) {
 
         conn.stateUpdateHandler = { [weak self] state in
-            guard case .ready = state else { return }
+            guard case .ready = state,
+                let weakSelf = self else { return }
 
             Task { @MainActor in
-                guard let self else { return }
-                self.isConnected = true
-                self.receiveFrame()
+                weakSelf.isConnected = true
+                weakSelf.receiveFrame()
             }
         }
+
 
         conn.start(queue: .main)
     }
@@ -80,16 +82,14 @@ final class NetworkManager: ObservableObject {
             ) { [weak self] imgData, _, _, _ in
                 // Validate image data
                 guard let imgData else { return }
-                // Decode image off-actor
-                let image = NSImage(data: imgData)
-                // Update UI on main thread
-                Task { @MainActor in
+                // Update the UI on the main thread
+                Task { @MainActor [weak self] in
                     guard let self else { return }
-                    // Set the received image
-                    if let image {
+                    // Convert the received data to an NSImage and update the published property
+                    if let image = NSImage(data: imgData) {
                         self.receivedImage = image
                     }
-                    // Continue listening
+                    // Continue listening for the next frame
                     self.receiveFrame()
                 }
             }

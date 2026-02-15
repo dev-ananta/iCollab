@@ -93,7 +93,11 @@ struct ContentView: View {
             capture.onFrameCaptured = { [weak network] data in
                 // We send the data directly through the network manager
                 DispatchQueue.main.async {
-                    network?.sendFrame(data)
+                    if let network {
+                        Task { @MainActor in
+                            network.sendFrame(data)
+                        }
+                    }
                 }
             }
         }
